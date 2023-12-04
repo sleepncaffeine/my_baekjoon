@@ -1,0 +1,6 @@
+n = int(input())
+num = int(input())
+nums = list(map(int, input().split()))
+nums.append(num)
+nums.sort(reverse=True)
+print(nums.index(num) + 1)
