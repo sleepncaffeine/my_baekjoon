@@ -1,23 +1,21 @@
 from collections import deque
 
-
-def bfs(n):
-    visited = [0] * 100001
-    dq = deque()
-    dq.append(n)
-    while dq:
-        pos = dq.popleft()
-        if pos == k:
-            return visited[pos]
-        for next_pos in (pos + 1, pos - 1, pos * 2):
-            if 0 <= next_pos <= 100000 and visited[next_pos] == 0:
-                if next_pos == pos * 2 and next_pos != 0:
-                    visited[next_pos] = visited[pos]
-                    dq.appendleft(next_pos)
-                else:
-                    visited[next_pos] = visited[pos] + 1
-                    dq.append(next_pos)
-
-
 n, k = map(int, input().split())
-print(bfs(n))
+visited = [0] * 100001
+q = deque()
+q.append(n)
+visited[n] = 1
+
+while q:
+    x = q.popleft()
+    if x == k:
+        print(visited[x] - 1)
+        break
+    for i in (x - 1, x + 1, x * 2):
+        if 0 <= i <= 100000 and visited[i] == 0:
+            if i == x * 2:
+                visited[i] = visited[x]
+                q.appendleft(i)
+            else:
+                visited[i] = visited[x] + 1
+                q.append(i)
